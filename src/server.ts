@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { createServer } from "http";
 import cors from "cors";
@@ -28,6 +28,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", rootRoute);
+app.get("/", (req, res) => {
+  return res.json({
+    success: true,
+    message: "Connected Successfully",
+  });
+});
 app.use(errorMiddleware);
 
 sockethttpServer.listen(PORT, () => {
